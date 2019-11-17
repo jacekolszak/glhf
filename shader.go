@@ -53,7 +53,9 @@ func NewShader(vertexFmt, uniformFmt AttrFormat, vertexShader, fragmentShader st
 			gl.GetShaderiv(vshader, gl.INFO_LOG_LENGTH, &logLen)
 
 			infoLog := make([]byte, logLen)
-			gl.GetShaderInfoLog(vshader, logLen, nil, &infoLog[0])
+			if logLen > 0 {
+				gl.GetShaderInfoLog(vshader, logLen, nil, &infoLog[0])
+			}
 			return nil, fmt.Errorf("error compiling vertex shader: %s", string(infoLog))
 		}
 
@@ -76,7 +78,9 @@ func NewShader(vertexFmt, uniformFmt AttrFormat, vertexShader, fragmentShader st
 			gl.GetShaderiv(fshader, gl.INFO_LOG_LENGTH, &logLen)
 
 			infoLog := make([]byte, logLen)
-			gl.GetShaderInfoLog(fshader, logLen, nil, &infoLog[0])
+			if logLen > 0 {
+				gl.GetShaderInfoLog(fshader, logLen, nil, &infoLog[0])
+			}
 			return nil, fmt.Errorf("error compiling fragment shader: %s", string(infoLog))
 		}
 
