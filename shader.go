@@ -163,9 +163,6 @@ func (s *Shader) UniformFormat() AttrFormat {
 //
 // The Shader must be bound before calling this method.
 func (s *Shader) SetUniformAttr(uniform int, value interface{}) (ok bool) {
-	if uniform >= len(s.uniformLoc) {
-		return false
-	}
 	if s.uniformLoc[uniform] < 0 {
 		return false
 	}
